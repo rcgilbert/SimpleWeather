@@ -13,10 +13,19 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+
+        let detroit = WeatherLocation(context: viewContext)
+        detroit.name = "Detroit, MI"
+        detroit.latitude = 42.3314
+        detroit.longitude = -83.0458
+        
+        
+        let losAngeles = WeatherLocation(context: viewContext)
+        losAngeles.name = "Los Angeles, CA"
+        losAngeles.latitude = 34.0522
+        losAngeles.longitude = -118.2437
+        
+    
         do {
             try viewContext.save()
         } catch {

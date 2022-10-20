@@ -1,52 +1,59 @@
 //
-//  ContentView.swift
+//  CitiesView.swift
 //  SimpleWeather
 //
 //  Created by Ryan Gilbert on 10/19/22.
 //
 
 import SwiftUI
-import CoreData
+import GooglePlaces
 
-struct ContentView: View {
+struct CitiesView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \WeatherLocation.order, ascending: true),
+                          NSSortDescriptor(keyPath: \WeatherLocation.name, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
-
+    private var cities: FetchedResults<WeatherLocation>
+    
+    @State var showAddCity: Bool = false
+    @State var place: GMSPlace?
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+                ForEach(cities) { city in
+                    Text(city.name!)
                 }
                 .onDelete(perform: deleteItems)
             }
+            .navigationTitle("Cities")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    Button("Add City") {
+                        showAddCity.toggle()
                     }
                 }
             }
-            Text("Select an item")
+            .sheet(isPresented: $showAddCity) {
+                AddCityView(place: $place)
+            }
+            .onChange(of: place, perform: add)
         }
     }
-
-    private func addItem() {
+    
+    private func add(city: GMSPlace?) {
+        guard let city = city else {
+            return
+        }
+        
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
+            let newItem = WeatherLocation(context: viewContext)
+            newItem.name = city.name
+            newItem.latitude = city.coordinate.latitude
+            newItem.longitude = city.coordinate.longitude
+            newItem.order = Int32((try? viewContext.count(for: WeatherLocation.fetchRequest())) ?? 0) + 1
             do {
                 try viewContext.save()
             } catch {
@@ -57,10 +64,10 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { cities[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
@@ -74,15 +81,9 @@ struct ContentView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
+struct CitiesView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        CitiesView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

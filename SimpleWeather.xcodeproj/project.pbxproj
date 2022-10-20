@@ -8,22 +8,42 @@
 
 /* Begin PBXBuildFile section */
 		449990112900BBCB00A291A0 /* SimpleWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990102900BBCB00A291A0 /* SimpleWeatherApp.swift */; };
-		449990132900BBCB00A291A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990122900BBCB00A291A0 /* ContentView.swift */; };
+		449990132900BBCB00A291A0 /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990122900BBCB00A291A0 /* ForecastView.swift */; };
 		449990152900BBCD00A291A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 449990142900BBCD00A291A0 /* Assets.xcassets */; };
 		449990182900BBCD00A291A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 449990172900BBCD00A291A0 /* Preview Assets.xcassets */; };
 		4499901A2900BBCD00A291A0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990192900BBCD00A291A0 /* Persistence.swift */; };
 		4499901D2900BBCD00A291A0 /* SimpleWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4499901B2900BBCD00A291A0 /* SimpleWeather.xcdatamodeld */; };
+		449990252900BD3800A291A0 /* ForecastDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990242900BD3800A291A0 /* ForecastDetailsView.swift */; };
+		449990272900BD6200A291A0 /* CitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990262900BD6200A291A0 /* CitiesView.swift */; };
+		449990292900BD7A00A291A0 /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449990282900BD7A00A291A0 /* AddCityView.swift */; };
+		4499902B2900BDA100A291A0 /* API-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4499902A2900BDA100A291A0 /* API-Config.plist */; };
+		44A86D812900C48200F8C910 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D802900C48200F8C910 /* APIConfig.swift */; };
+		44A86D842900C51A00F8C910 /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D832900C51A00F8C910 /* WeatherClient.swift */; };
+		44A86D862900C70F00F8C910 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D852900C70F00F8C910 /* WeatherData.swift */; };
+		44A86D892900CDCF00F8C910 /* WeatherLocation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D882900CDCF00F8C910 /* WeatherLocation+Helpers.swift */; };
+		F7A96666432A8EE0F167DA63 /* Pods_SimpleWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A7D4989DCC545D5E858FAA /* Pods_SimpleWeather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C589E7C9EB3E69B0D749659 /* Pods-SimpleWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleWeather.release.xcconfig"; path = "Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather.release.xcconfig"; sourceTree = "<group>"; };
 		4499900D2900BBCB00A291A0 /* SimpleWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		449990102900BBCB00A291A0 /* SimpleWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherApp.swift; sourceTree = "<group>"; };
-		449990122900BBCB00A291A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		449990122900BBCB00A291A0 /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		449990142900BBCD00A291A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		449990172900BBCD00A291A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		449990192900BBCD00A291A0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4499901C2900BBCD00A291A0 /* SimpleWeather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleWeather.xcdatamodel; sourceTree = "<group>"; };
 		4499901E2900BBCD00A291A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		449990242900BD3800A291A0 /* ForecastDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailsView.swift; sourceTree = "<group>"; };
+		449990262900BD6200A291A0 /* CitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesView.swift; sourceTree = "<group>"; };
+		449990282900BD7A00A291A0 /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
+		4499902A2900BDA100A291A0 /* API-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "API-Config.plist"; sourceTree = "<group>"; };
+		44A86D802900C48200F8C910 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		44A86D832900C51A00F8C910 /* WeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClient.swift; sourceTree = "<group>"; };
+		44A86D852900C70F00F8C910 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		44A86D882900CDCF00F8C910 /* WeatherLocation+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherLocation+Helpers.swift"; sourceTree = "<group>"; };
+		75A7D4989DCC545D5E858FAA /* Pods_SimpleWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBE3C5C60A7A3BA651FC3A27 /* Pods-SimpleWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleWeather.debug.xcconfig"; path = "Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7A96666432A8EE0F167DA63 /* Pods_SimpleWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +63,8 @@
 			children = (
 				4499900F2900BBCB00A291A0 /* SimpleWeather */,
 				4499900E2900BBCB00A291A0 /* Products */,
+				B7B58DA8F09A669820D2ACF5 /* Pods */,
+				97445D6D30C74AC61336C997 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,11 +79,18 @@
 		4499900F2900BBCB00A291A0 /* SimpleWeather */ = {
 			isa = PBXGroup;
 			children = (
+				44A86D872900CDB900F8C910 /* Extensions */,
+				44A86D822900C50E00F8C910 /* API */,
+				44A86D7F2900C47600F8C910 /* Models */,
 				449990102900BBCB00A291A0 /* SimpleWeatherApp.swift */,
-				449990122900BBCB00A291A0 /* ContentView.swift */,
+				449990122900BBCB00A291A0 /* ForecastView.swift */,
+				449990242900BD3800A291A0 /* ForecastDetailsView.swift */,
+				449990262900BD6200A291A0 /* CitiesView.swift */,
+				449990282900BD7A00A291A0 /* AddCityView.swift */,
 				449990142900BBCD00A291A0 /* Assets.xcassets */,
 				449990192900BBCD00A291A0 /* Persistence.swift */,
 				4499901E2900BBCD00A291A0 /* Info.plist */,
+				4499902A2900BDA100A291A0 /* API-Config.plist */,
 				4499901B2900BBCD00A291A0 /* SimpleWeather.xcdatamodeld */,
 				449990162900BBCD00A291A0 /* Preview Content */,
 			);
@@ -75,6 +105,48 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		44A86D7F2900C47600F8C910 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44A86D852900C70F00F8C910 /* WeatherData.swift */,
+				44A86D802900C48200F8C910 /* APIConfig.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44A86D822900C50E00F8C910 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				44A86D832900C51A00F8C910 /* WeatherClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		44A86D872900CDB900F8C910 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44A86D882900CDCF00F8C910 /* WeatherLocation+Helpers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		97445D6D30C74AC61336C997 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75A7D4989DCC545D5E858FAA /* Pods_SimpleWeather.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B7B58DA8F09A669820D2ACF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DBE3C5C60A7A3BA651FC3A27 /* Pods-SimpleWeather.debug.xcconfig */,
+				2C589E7C9EB3E69B0D749659 /* Pods-SimpleWeather.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 449990212900BBCD00A291A0 /* Build configuration list for PBXNativeTarget "SimpleWeather" */;
 			buildPhases = (
+				70EBE114DCBAEDA3F8340154 /* [CP] Check Pods Manifest.lock */,
 				449990092900BBCB00A291A0 /* Sources */,
 				4499900A2900BBCB00A291A0 /* Frameworks */,
 				4499900B2900BBCB00A291A0 /* Resources */,
+				E54F1D03D29F8B8E8CC2D533 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,21 +208,71 @@
 			buildActionMask = 2147483647;
 			files = (
 				449990182900BBCD00A291A0 /* Preview Assets.xcassets in Resources */,
+				4499902B2900BDA100A291A0 /* API-Config.plist in Resources */,
 				449990152900BBCD00A291A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70EBE114DCBAEDA3F8340154 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SimpleWeather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E54F1D03D29F8B8E8CC2D533 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		449990092900BBCB00A291A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				449990252900BD3800A291A0 /* ForecastDetailsView.swift in Sources */,
 				4499901D2900BBCD00A291A0 /* SimpleWeather.xcdatamodeld in Sources */,
+				44A86D842900C51A00F8C910 /* WeatherClient.swift in Sources */,
+				44A86D812900C48200F8C910 /* APIConfig.swift in Sources */,
 				4499901A2900BBCD00A291A0 /* Persistence.swift in Sources */,
-				449990132900BBCB00A291A0 /* ContentView.swift in Sources */,
+				449990132900BBCB00A291A0 /* ForecastView.swift in Sources */,
+				44A86D862900C70F00F8C910 /* WeatherData.swift in Sources */,
 				449990112900BBCB00A291A0 /* SimpleWeatherApp.swift in Sources */,
+				44A86D892900CDCF00F8C910 /* WeatherLocation+Helpers.swift in Sources */,
+				449990272900BD6200A291A0 /* CitiesView.swift in Sources */,
+				449990292900BD7A00A291A0 /* AddCityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +395,7 @@
 		};
 		449990222900BBCD00A291A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBE3C5C60A7A3BA651FC3A27 /* Pods-SimpleWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -300,6 +425,7 @@
 		};
 		449990232900BBCD00A291A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C589E7C9EB3E69B0D749659 /* Pods-SimpleWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
