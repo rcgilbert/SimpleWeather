@@ -10,6 +10,7 @@ import GooglePlaces
 
 struct CitiesView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \WeatherLocation.order, ascending: true),
@@ -27,12 +28,20 @@ struct CitiesView: View {
                     Text(city.name!)
                 }
                 .onDelete(perform: deleteItems)
+                .onMove(perform: move)
             }
             .navigationTitle("Cities")
             .toolbar {
                 ToolbarItem {
                     Button("Add City") {
                         showAddCity.toggle()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
                     }
                 }
             }
@@ -77,6 +86,32 @@ struct CitiesView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+        }
+    }
+    
+    private func move(from source: IndexSet, to destination: Int) {
+        // Make an array of items from fetched results
+        var revisedItems = cities.map { $0 }
+        
+        // change the order of the items in the array
+        revisedItems.move(fromOffsets: source, toOffset: destination )
+        
+        // update the userOrder attribute in revisedItems to
+        // persist the new order. This is done in reverse order
+        // to minimize changes to the indices.
+        for reverseIndex in stride(from: revisedItems.count - 1,
+                                   through: 0,
+                                   by: -1) {
+            revisedItems[reverseIndex].order = Int32(reverseIndex)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

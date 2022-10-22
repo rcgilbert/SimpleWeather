@@ -11,10 +11,12 @@ import CoreLocation
 final class WeatherClient {
     // MARK: - Config
     private static var BASE_URL: String = ""
+    private static var ICON_BASE_URL: String = ""
     private static var API_KEY: String = ""
     
     class func configure(with apiConfig: APIConfig) {
         BASE_URL = apiConfig.weatherAPIBaseURL
+        ICON_BASE_URL = apiConfig.weatherIconBaseURL
         API_KEY = apiConfig.weatherAPIKey
     }
     
@@ -102,11 +104,21 @@ final class WeatherClient {
         
         // Make sure we got a success response
         guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
+            print((try? JSONSerialization.jsonObject(with: data)) ?? "")
             throw WeatherError.responseError(response: response)
         }
         
         // Decode API data
         return try jsonDecoder.decode(WeatherData.self, from: data)
+    }
+    
+    class func iconURL(for weather: Weather) -> URL? {
+        guard var urlComponents = URLComponents(string: ICON_BASE_URL),
+              let iconName = weather.icon else {
+            return nil
+        }
         
+        urlComponents.path.append("/\(iconName)@2x.png")
+        return urlComponents.url
     }
 }

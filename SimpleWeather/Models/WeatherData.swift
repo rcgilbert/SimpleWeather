@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - WeatherData
 struct WeatherData: Codable {
+    let id: UUID = UUID()
     let lat: Double
     let lon: Double
     let timezone: String?
@@ -32,12 +33,15 @@ struct WeatherData: Codable {
     }
 }
 
+extension WeatherData: Identifiable { }
+extension WeatherData: Equatable { }
+
 // MARK: - Alert
 struct Alert: Codable {
     let senderName: String?
     let event: String?
-    let start: Int?
-    let end: Int?
+    let start: TimeInterval?
+    let end: TimeInterval?
     let alertDescription: String?
 
     enum CodingKeys: String, CodingKey {
@@ -49,19 +53,21 @@ struct Alert: Codable {
     }
 }
 
+extension Alert: Equatable { }
+
 // MARK: - Current
 struct Current: Codable {
-    let dt: Int?
-    let sunrise: Int?
-    let sunset: Int?
+    let dt: TimeInterval
+    let sunrise: TimeInterval?
+    let sunset: TimeInterval?
     let temp: Double?
     let feelsLike: Double?
-    let pressure: Int?
+    let pressure: Double?
     let humidity: Int?
     let dewPoint: Double?
     let uvi: Double?
     let clouds: Int?
-    let visibility: Int?
+    let visibility: Double?
     let windSpeed: Double?
     let windDeg: Int?
     let windGust: Double?
@@ -88,6 +94,8 @@ struct Current: Codable {
     }
 }
 
+extension Current: Equatable { }
+
 // MARK: - Weather
 struct Weather: Codable {
     let id: Int?
@@ -103,17 +111,20 @@ struct Weather: Codable {
     }
 }
 
+extension Weather: Equatable { }
+
 // MARK: - Daily
 struct Daily: Codable {
-    let dt: Int?
-    let sunrise: Int?
-    let sunset: Int?
-    let moonrise: Int?
-    let moonset: Int?
+    let id: UUID = UUID()
+    let dt: TimeInterval
+    let sunrise: TimeInterval?
+    let sunset: TimeInterval?
+    let moonrise: TimeInterval?
+    let moonset: TimeInterval?
     let moonPhase: Double?
     let temp: Temp?
     let feelsLike: FeelsLike?
-    let pressure: Int?
+    let pressure: Double?
     let humidity: Int?
     let dewPoint: Double?
     let windSpeed: Double?
@@ -148,6 +159,9 @@ struct Daily: Codable {
     }
 }
 
+extension Daily: Equatable { }
+extension Daily: Identifiable { }
+
 // MARK: - FeelsLike
 struct FeelsLike: Codable {
     let day: Double?
@@ -162,6 +176,8 @@ struct FeelsLike: Codable {
         case morn = "morn"
     }
 }
+
+extension FeelsLike: Equatable { }
 
 // MARK: - Temp
 struct Temp: Codable {
@@ -182,9 +198,11 @@ struct Temp: Codable {
     }
 }
 
+extension Temp: Equatable { }
+
 // MARK: - Minutely
 struct Minutely: Codable {
-    let dt: Int?
+    let dt: TimeInterval
     let precipitation: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -193,3 +211,4 @@ struct Minutely: Codable {
     }
 }
 
+extension Minutely: Equatable { }

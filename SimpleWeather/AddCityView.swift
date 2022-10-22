@@ -46,10 +46,18 @@ struct AddCityView: View {
                             .scaleEffect(2)
                             .tint(.white)
                     }
-                    
                 }
             }
             .navigationTitle("Add City")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+            }
         }
     }
     
