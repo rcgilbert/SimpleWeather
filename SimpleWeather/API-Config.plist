@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Weather_Base_URL</key>
-	<string></string>
+	<string>https://api.openweathermap.org/data/3.0/onecall</string>
 	<key>Weather_Icon_Base_URL</key>
 	<string>https://openweathermap.org/img/wn</string>
 	<key>Weather_API_Key</key>
