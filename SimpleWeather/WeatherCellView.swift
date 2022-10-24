@@ -60,7 +60,6 @@ struct WeatherCellView_Previews: PreviewProvider {
     
     static var previews: some View {
         WeatherCellView(name: "Detroit", weatherData: $wData, formatter: .defaultTempFormatter)
-            .previewDevice("iPhone 14 Pro")
             .previewLayout(.fixed(width: 300, height: 100))
     }
 }

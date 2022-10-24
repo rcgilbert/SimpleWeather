@@ -27,7 +27,7 @@ struct ForecastView: View {
                     Section {
                         NavigationLink {
                             ForecastDetailsView(city: city,
-                                                weatherData: $weatherDataForCity[city.latLongString], formatter: formatter)
+                                                weatherData: $weatherDataForCity[city.latLongString], tempFormatter: formatter)
                         } label: {
                             VStack {
                                 WeatherCellView(name: city.name!,
@@ -48,32 +48,37 @@ struct ForecastView: View {
                     }
                 }
             }
+            .onReceive(cities.publisher) { city in
+                Task {
+                    await fetchWeather(for: city)
+                }
+            }
             .sheet(isPresented: $showListOfCities) {
                 CitiesView()
             }
             .refreshable {
-                await fetchWeather()
-            }
-            .onAppear {
-                Task {
-                   await fetchWeather()
-                }
+                await fetchAllWeather()
             }
         }
     }
     
-    private func fetchWeather() async {
+    private func fetchAllWeather() async {
         for city in cities {
-            do {
-                let weather = try await WeatherClient.fetchWeather(for: city.coordinates,
-                                                                   excluding: [.alerts, .hourly, .minutely])
-                withAnimation {
-                    weatherDataForCity[city.latLongString] = weather
-                }
-            } catch {
-                print(error)
-                // TODO: Error handling
+            await fetchWeather(for: city)
+        }
+    }
+    
+    private func fetchWeather(for city: WeatherLocation) async {
+        print("Fetching Weather for \(city.name!)")
+        do {
+            let weather = try await WeatherClient.fetchWeather(for: city.coordinates,
+                                                               excluding: [.alerts, .minutely])
+            withAnimation {
+                weatherDataForCity[city.latLongString] = weather
             }
+        } catch {
+            print(error)
+            // TODO: Error handling
         }
     }
     

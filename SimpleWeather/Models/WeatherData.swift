@@ -57,6 +57,7 @@ extension Alert: Equatable { }
 
 // MARK: - Current
 struct Current: Codable {
+    let id: UUID = UUID()
     let dt: TimeInterval
     let sunrise: TimeInterval?
     let sunset: TimeInterval?
@@ -95,6 +96,7 @@ struct Current: Codable {
 }
 
 extension Current: Equatable { }
+extension Current: Identifiable { }
 
 // MARK: - Weather
 struct Weather: Codable {

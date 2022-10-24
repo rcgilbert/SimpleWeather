@@ -11,10 +11,17 @@ struct ForecastDetailsView: View {
     @State var city: WeatherLocation
     @Binding var weatherData: WeatherData?
     
-    var formatter: MeasurementFormatter
+    var tempFormatter: MeasurementFormatter
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.setLocalizedDateFormatFromTemplate("EEE")
+        return df
+    }()
+    
+    var timeFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .none
+        df.timeStyle = .short
         return df
     }()
     
@@ -25,7 +32,7 @@ struct ForecastDetailsView: View {
                     Spacer()
                     VStack(spacing: 8) {
                         if let temp = weatherData?.current?.tempMeasurement {
-                            Text(temp, formatter: formatter)
+                            Text(temp, formatter: tempFormatter)
                                 .font(.title)
                         } else {
                             Text("--")
@@ -37,14 +44,14 @@ struct ForecastDetailsView: View {
                         HStack {
                             if let max = weatherData?.daily?.first?.temp?.maxTempMeasurement {
                                 HStack {
-                                    Text("H:\(formatter.string(from: max))")
+                                    Text("H:\(tempFormatter.string(from: max))")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                 }
                             }
                             if let min = weatherData?.daily?.first?.temp?.minTempMeasurement {
                                 HStack {
-                                    Text("L:\(formatter.string(from: min))")
+                                    Text("L:\(tempFormatter.string(from: min))")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                 }
@@ -54,48 +61,115 @@ struct ForecastDetailsView: View {
                     Spacer()
                 }
             }
-            Section("Daily") {
-                ForEach(weatherData?.daily ?? []) { day in
-                    HStack {
-                        Text(Date(timeIntervalSince1970: day.dt), formatter: dateFormatter)
-                            .frame(minWidth: 44)
-                        Spacer()
-                        if let weather = day.weather?.first {
-                            AsyncImage(url: WeatherClient.iconURL(for: weather)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(maxWidth: 44, maxHeight: 44)
-                            } placeholder: {
-                                Image(systemName: "arrow.clockwise.icloud.fill")
-                                    .resizable()
-                                    .padding(10)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 44, height: 44)
-                                    .opacity(0.5)
-                            }
-                        }
-                        Spacer()
-                        Spacer()
-                        HStack() {
-                            if let max = day.temp?.maxTempMeasurement {
-                                Text("H:\(formatter.string(from: max))")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                            
-                            if let min = day.temp?.minTempMeasurement {
-                                Text("L:\(formatter.string(from: min))")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
+            if let hourly = weatherData?.hourly, hourly.count > 0 {
+                Section("Hourly") {
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(hourly) { hour in
+                                HourlyCellView(hour: hour,
+                                               timeFormatter: timeFormatter,
+                                               tempFormatter: tempFormatter)
                             }
                         }
                     }
-                    .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            Section("Daily") {
+                ForEach(weatherData?.daily ?? []) { day in
+                    DailyCellView(day: day,
+                                  dateFormatter: dateFormatter,
+                                  tempFormatter: tempFormatter)
                 }
             }
         }
         .navigationTitle(city.name!)
+    }
+}
+
+struct DailyCellView: View {
+    @State var day: Daily
+    var dateFormatter: DateFormatter
+    var tempFormatter: MeasurementFormatter
+    
+    var body: some View {
+        HStack {
+            Text(Date(timeIntervalSince1970: day.dt), formatter: dateFormatter)
+                .frame(minWidth: 44)
+            Spacer()
+            if let weather = day.weather?.first {
+                AsyncImage(url: WeatherClient.iconURL(for: weather)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 44, maxHeight: 44)
+                } placeholder: {
+                    Image(systemName: "arrow.clockwise.icloud.fill")
+                        .resizable()
+                        .padding(10)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 44, height: 44)
+                        .opacity(0.5)
+                }
+            }
+            Spacer()
+            Spacer()
+            HStack() {
+                if let max = day.temp?.maxTempMeasurement {
+                    Text("H:\(tempFormatter.string(from: max))")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                
+                if let min = day.temp?.minTempMeasurement {
+                    Text("L:\(tempFormatter.string(from: min))")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+    }
+}
+
+struct HourlyCellView: View {
+    @State var hour: Current
+    var timeFormatter: DateFormatter
+    var tempFormatter: MeasurementFormatter
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 8) {
+            Text(Date(timeIntervalSince1970: hour.dt), formatter: timeFormatter)
+                .font(.subheadline)
+            if let weather = hour.weather?.first {
+                AsyncImage(url: WeatherClient.iconURL(for: weather)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 44, maxHeight: 44)
+                } placeholder: {
+                    Image(systemName: "arrow.clockwise.icloud.fill")
+                        .resizable()
+                        .padding(10)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 44, height: 44)
+                        .opacity(0.5)
+                }
+            } else {
+                Image(systemName: "arrow.clockwise.icloud.fill")
+                    .resizable()
+                    .padding(10)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 44, height: 44)
+                    .opacity(0.5)
+            }
+            if let temp = hour.tempMeasurement {
+                Text(temp, formatter: tempFormatter)
+                    .font(.headline)
+            } else {
+                Text("--")
+                    .font(.headline)
+            }
+        }
+        .padding()
     }
 }
 
@@ -106,7 +180,7 @@ struct ForecastDetailsView_Previews: PreviewProvider {
         NavigationView {
             ForecastDetailsView(city: WeatherLocation.preview,
                                 weatherData: $weather,
-                                formatter: .defaultTempFormatter)
+                                tempFormatter: .defaultTempFormatter)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
