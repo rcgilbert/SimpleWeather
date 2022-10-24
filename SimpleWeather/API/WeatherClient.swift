@@ -54,15 +54,11 @@ final class WeatherClient {
     private static let session: URLSession = .shared
     private static let jsonDecoder = JSONDecoder()
     
-    private static var languageString: String {
-        Locale.current.language.minimalIdentifier
-    }
-    
-    private static var unitsString: String {
-        Locale.current.measurementSystem == .metric ? "metric": "imperial"
-    }
-    
-    class func fetchWeather(for location: CLLocationCoordinate2D, excluding: [ReportType] = []) async throws -> WeatherData {
+    /// Fetch weather data for a particular location.
+    /// - Parameter location: The coordinates to retrieve weather data for.
+    /// - Parameter excludiing: Data types to exlude in weather response. Default is to include everything.
+    /// - Parameter locale: The locale used to localize weather data. Default is current device locale.
+    class func fetchWeather(for location: CLLocationCoordinate2D, excluding: [ReportType] = [], locale: Locale = .current) async throws -> WeatherData {
         // Build URL Request
         guard var urlComponents = URLComponents(string: BASE_URL) else {
             throw WeatherError.invalidURL(BASE_URL)
@@ -83,9 +79,9 @@ final class WeatherClient {
                     return partialResult + ",\(reportType.rawValue)"
                 }
             case .units:
-                value = unitsString
+                value = locale.weatherUnitsString
             case .lang:
-                value = languageString
+                value = locale.language.minimalIdentifier
             }
             
             parameters.append(URLQueryItem(name: param.rawValue, value: value))
@@ -104,7 +100,6 @@ final class WeatherClient {
         
         // Make sure we got a success response
         guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
-            print((try? JSONSerialization.jsonObject(with: data)) ?? "")
             throw WeatherError.responseError(response: response)
         }
         
@@ -112,6 +107,8 @@ final class WeatherClient {
         return try jsonDecoder.decode(WeatherData.self, from: data)
     }
     
+    /// Generates a URL to fetch an icon for a weather forecast.
+    /// - Parameter weather: the `Weather` object to generate an icon URL for. 
     class func iconURL(for weather: Weather) -> URL? {
         guard var urlComponents = URLComponents(string: ICON_BASE_URL),
               let iconName = weather.icon else {

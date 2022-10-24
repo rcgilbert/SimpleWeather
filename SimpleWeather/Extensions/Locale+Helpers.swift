@@ -11,4 +11,8 @@ extension Locale {
     var tempuratureUnit: UnitTemperature {
         measurementSystem == .metric ? .celsius: .fahrenheit
     }
+    
+    var weatherUnitsString: String {
+        measurementSystem == .metric ? "metric": "imperial"
+    }
 }

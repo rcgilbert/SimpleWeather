@@ -20,7 +20,7 @@ struct WeatherCellView: View {
                     .font(.headline)
                     .fontWeight(.medium)
                 Spacer()
-                Text(weatherData?.current?.weather?.first?.weatherDescription?.capitalized ?? "")
+                Text(weatherData?.current?.formattedWeatherDescription ?? "")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

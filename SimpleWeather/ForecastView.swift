@@ -69,7 +69,6 @@ struct ForecastView: View {
     }
     
     private func fetchWeather(for city: WeatherLocation) async {
-        print("Fetching Weather for \(city.name!)")
         do {
             let weather = try await WeatherClient.fetchWeather(for: city.coordinates,
                                                                excluding: [.alerts, .minutely])
@@ -77,8 +76,8 @@ struct ForecastView: View {
                 weatherDataForCity[city.latLongString] = weather
             }
         } catch {
-            print(error)
             // TODO: Error handling
+            print(error)
         }
     }
     

@@ -70,8 +70,12 @@ struct AddCityView: View {
                           placeFields: fields,
                           sessionToken: token) { place, error in
             isLoading = false
+            guard error == nil else {
+                print(error!.localizedDescription)
+                // TODO: Error handling
+                return
+            }
             
-            // TODO: Error handling
             if let place = place {
                 self.place = place
                 presentationMode.wrappedValue.dismiss()

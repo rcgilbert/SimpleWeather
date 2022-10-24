@@ -25,6 +25,7 @@
 		44A86D842900C51A00F8C910 /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D832900C51A00F8C910 /* WeatherClient.swift */; };
 		44A86D862900C70F00F8C910 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D852900C70F00F8C910 /* WeatherData.swift */; };
 		44A86D892900CDCF00F8C910 /* WeatherLocation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A86D882900CDCF00F8C910 /* WeatherLocation+Helpers.swift */; };
+		44C75E6C2907150C00E28A42 /* DateFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C75E6B2907150C00E28A42 /* DateFormatter+Helpers.swift */; };
 		F7A96666432A8EE0F167DA63 /* Pods_SimpleWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A7D4989DCC545D5E858FAA /* Pods_SimpleWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		44A86D832900C51A00F8C910 /* WeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClient.swift; sourceTree = "<group>"; };
 		44A86D852900C70F00F8C910 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		44A86D882900CDCF00F8C910 /* WeatherLocation+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherLocation+Helpers.swift"; sourceTree = "<group>"; };
+		44C75E6B2907150C00E28A42 /* DateFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Helpers.swift"; sourceTree = "<group>"; };
 		75A7D4989DCC545D5E858FAA /* Pods_SimpleWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE3C5C60A7A3BA651FC3A27 /* Pods-SimpleWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleWeather.debug.xcconfig"; path = "Target Support Files/Pods-SimpleWeather/Pods-SimpleWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +140,7 @@
 				443B328D29033BE600C87545 /* WeatherData+Helpers.swift */,
 				443B328F29033C4100C87545 /* Locale+Helpers.swift */,
 				443B329129035F5C00C87545 /* MeasurementFormatter+Helpers.swift */,
+				44C75E6B2907150C00E28A42 /* DateFormatter+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				44A86D842900C51A00F8C910 /* WeatherClient.swift in Sources */,
 				44A86D812900C48200F8C910 /* APIConfig.swift in Sources */,
 				4499901A2900BBCD00A291A0 /* Persistence.swift in Sources */,
+				44C75E6C2907150C00E28A42 /* DateFormatter+Helpers.swift in Sources */,
 				449990132900BBCB00A291A0 /* ForecastView.swift in Sources */,
 				443B328E29033BE600C87545 /* WeatherData+Helpers.swift in Sources */,
 				44A86D862900C70F00F8C910 /* WeatherData.swift in Sources */,

@@ -12,18 +12,8 @@ struct ForecastDetailsView: View {
     @Binding var weatherData: WeatherData?
     
     var tempFormatter: MeasurementFormatter
-    var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.setLocalizedDateFormatFromTemplate("EEE")
-        return df
-    }()
-    
-    var timeFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .none
-        df.timeStyle = .short
-        return df
-    }()
+    var dateFormatter: DateFormatter = .defaultDayOfWeekFormatter
+    var timeFormatter: DateFormatter = .defaultTimeFormatter
     
     var body: some View {
         List {
@@ -38,18 +28,18 @@ struct ForecastDetailsView: View {
                             Text("--")
                                 .font(.title)
                         }
-                        Text(weatherData?.current?.weather?.first?.weatherDescription?.capitalized ?? "")
+                        Text(weatherData?.current?.formattedWeatherDescription ?? "")
                             .font(.headline)
                             .foregroundStyle(.secondary)
                         HStack {
-                            if let max = weatherData?.daily?.first?.temp?.maxTempMeasurement {
+                            if let max = weatherData?.currentMaxTempMeasurment {
                                 HStack {
                                     Text("H:\(tempFormatter.string(from: max))")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                 }
                             }
-                            if let min = weatherData?.daily?.first?.temp?.minTempMeasurement {
+                            if let min = weatherData?.currentMinTempMeasurment {
                                 HStack {
                                     Text("L:\(tempFormatter.string(from: min))")
                                         .font(.subheadline)
